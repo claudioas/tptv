@@ -1,40 +1,46 @@
 new Vue({
   el: '#app',
   data: {
-    message: 'claudio',
+    errors:[],
+    u:'',
+    p:'',
     dialog: false,
     drawer: null,
-    items: [
-      { icon: 'contacts', text: 'Contacts' },
-      { icon: 'history', text: 'Frequently contacted' },
-      { icon: 'content_copy', text: 'Duplicates' },
-      {
-        icon: 'keyboard_arrow_up',
-        'icon-alt': 'keyboard_arrow_down',
-        text: 'Labels',
-        model: true,
-        children: [
-          { icon: 'add', text: 'Create label' }
-        ]
-      },
-      {
-        icon: 'keyboard_arrow_up',
-        'icon-alt': 'keyboard_arrow_down',
-        text: 'More',
-        model: false,
-        children: [
-          { text: 'Import' },
-          { text: 'Export' },
-          { text: 'Print' },
-          { text: 'Undo changes' },
-          { text: 'Other contacts' }
-        ]
-      },
-      { icon: 'settings', text: 'Settings' },
-      { icon: 'chat_bubble', text: 'Send feedback' },
-      { icon: 'help', text: 'Help' },
-      { icon: 'phonelink', text: 'App downloads' },
-      { icon: 'keyboard', text: 'Go to the old version' }
-    ]
+      items: [
+        { icon: 'lightbulb_outline', text: 'Notes' },
+        { icon: 'touch_app', text: 'Reminders' },
+        { divider: true },
+        { heading: 'Labels' },
+        { icon: 'add', text: 'Create new label' },
+        { divider: true },
+        { icon: 'archive', text: 'Archive' },
+        { icon: 'delete', text: 'Trash' },
+        { divider: true },
+        { icon: 'settings', text: 'Settings' },
+        { icon: 'chat_bubble', text: 'Trash' },
+        { icon: 'help', text: 'Help' },
+        { icon: 'phonelink', text: 'App downloads' },
+        { icon: 'keyboard', text: 'Keyboard shortcuts' }
+      ]
+  },
+  props: {
+      source: String
+  },
+  methods: {
+    login: function(e){
+        let datos = {u:this.u,p:this.p};
+        this.$http.post(base_url+'index/login', datos, {emulateJSON: true}).then(function (response) {
+          let c = response.data.replace('"', "");
+          c = c.replace('"', "");
+          let s = c.substring(0,c.length-2)
+          if (c.substring(c.length-2) == '_c') {
+            window.location.href = base_url+s+"/"+c;
+          }else{
+            this.dialog = true;
+          }
+      },function (response) {
+          console.log(response)
+      });
+    },
   }
 })
