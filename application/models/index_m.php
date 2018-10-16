@@ -18,10 +18,6 @@ class index_m extends CI_Model{
       return "noRegistrado";
     }
 
-    for ($i=0; $i < count($miarray[0]); $i++) {
-
-    }
-
   }
 
 }
