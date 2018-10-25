@@ -8,7 +8,7 @@ class index_m extends CI_Model{
   }
 
   function login($u,$p){
-    $query = "select * from personas inner join perfiles on personas.perf_id = perfiles.perf_id where per_nombre = '".$u."' ";
+    $query = "select * from personas inner join perfiles on personas.perf_id = perfiles.perf_id where per_usuario = '".$u."' ";
     $resultado = $this->db->query($query)->result_array();
     if (!empty($resultado)) {
       if (count($resultado) == 1) {

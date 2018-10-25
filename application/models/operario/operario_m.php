@@ -7,5 +7,8 @@ class operario_m extends CI_Model{
     parent::__construct();
   }
 
+  function ingresarReferencia($ot,$articulo,$um,$referencia,$cantxcaja,$kilosxcaja){
+    var_dump($ot,$articulo,$um,$referencia,$cantxcaja,$kilosxcaja);
+  }
 
 }

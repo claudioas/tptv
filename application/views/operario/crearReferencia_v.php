@@ -64,7 +64,7 @@
 				</v-navigation-drawer>
 				<v-toolbar color="amber" app absolute clipped-left>
 					<v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
-					<span class="title ml-3 mr-5">TPT&nbsp;<span class="font-weight-light"></span></span>
+					<span class="title ml-3 mr-5">Transferencia de Productos Terminados&nbsp;<span class="font-weight-light"></span></span>
 					<!-- <v-text-field
 		        solo-inverted
 		        flat
@@ -81,11 +81,14 @@
 							  <v-layout justify-center>
 							    <v-flex xs12 sm10 md8 lg6>
 							      <v-card ref="form">
-							        <v-card-text>
+											<v-toolbar>
 												<v-toolbar-title>Crear Referencia</v-toolbar-title>
+											</v-toolbar>
+							        <v-card-text>
+
 												<v-autocomplete
 													box
-													color="blue-grey lighten-2"
+													color="blue-grey lighten-1"
 													label="Orden de Trabajo"
 													item-text="name"
 													item-value="name"
@@ -94,22 +97,27 @@
 												>
 												</v-autocomplete>
 							          <v-text-field
+													v-model="articulo"
 							            label="Articulo"
 							            required
 							          ></v-text-field>
 							          <v-text-field
+													v-model="um"
 							            label="Unidad de Medida"
 							            required
 							          ></v-text-field>
 							          <v-text-field
+													v-model="referencia"
 							            label="Referencia"
 							            required
 							          ></v-text-field>
 							          <v-text-field
+													v-model="cantxcaja"
 							            label="Cantidad por Caja"
 							            required
 							          ></v-text-field>
 												<v-text-field
+													v-model="kilosxcaja"
 							            label="Kilos por Caja"
 							            required
 							          ></v-text-field>
@@ -117,14 +125,13 @@
 							        <v-divider class="mt-5"></v-divider>
 							        <v-card-actions>
 												<v-spacer></v-spacer>
-							          <v-btn color="primary" flat @click="ingresarReferencia">INgresar</v-btn>
+							          <v-btn color="primary" @click="ingresarReferencia">INgresar</v-btn>
 							        </v-card-actions>
 							      </v-card>
 							    </v-flex>
 							  </v-layout>
 							</template>
 						</v-layout>
-
 					</v-container>
 				</v-content>
 			</v-app>
@@ -136,7 +143,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
 	<script src="<?php echo base_url() ?>js/vue-custom-element.js"></script>
-	<script src="<?php echo base_url() ?>js/operario/operario_j.js"></script>
+	<script src="<?php echo base_url() ?>js/operario/crearReferencia_j.js"></script>
 </body>
 
 </html>
