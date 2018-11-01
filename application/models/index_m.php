@@ -12,6 +12,8 @@ class index_m extends CI_Model{
     $resultado = $this->db->query($query)->result_array();
     if (!empty($resultado)) {
       if (count($resultado) == 1) {
+        session_start();
+        $_SESSION['per_tipo'] = $resultado[0]['per_tipo'];
         return $resultado[0]['perf_nombre'];
       }
     }else {
