@@ -64,7 +64,8 @@
 				</v-navigation-drawer>
 				<v-toolbar color="amber" app absolute clipped-left>
 					<v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
-					<span class="title ml-3 mr-5">Transferencia de Productos Terminados&nbsp;<span class="font-weight-light"></span></span>
+					<span class="title ml-3 mr-5">TPT&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;<?php  echo $_SESSION['per_tipo'] ?><span class="font-weight-light"></span></span>
+					<!-- <span class="title ml-3 mr-5">Transferencia de Productos Terminados&nbsp;<span class="font-weight-light"></span></span> -->
 					<!-- <v-text-field
 		        solo-inverted
 		        flat

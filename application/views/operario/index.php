@@ -35,7 +35,7 @@
 		          >
 		            <v-flex xs6>
 		              <v-subheader v-if="item.heading">
-		                {{ item.heading }}
+		                 {{ item.heading }}
 		              </v-subheader>
 		            </v-flex>
 		          </v-layout>
@@ -64,7 +64,8 @@
 				</v-navigation-drawer>
 				<v-toolbar color="amber" app absolute clipped-left>
 					<v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
-					<span class="title ml-3 mr-5">TPT&nbsp;<span class="font-weight-light"></span></span>
+
+					<span class="title ml-3 mr-5">TPT&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;<?php  echo $_SESSION['per_tipo'] ?><span class="font-weight-light"></span></span>
 					<!-- <v-text-field
 		        solo-inverted
 		        flat
@@ -96,22 +97,27 @@
 							          <v-text-field
 							            label="Articulo"
 							            required
+													v-model="articulo"
 							          ></v-text-field>
 							          <v-text-field
 							            label="Unidad de Medida"
 							            required
+													v-model="um"
 							          ></v-text-field>
 							          <v-text-field
 							            label="Referencia"
 							            required
+													v-model="referencia"
 							          ></v-text-field>
 							          <v-text-field
 							            label="Cantidad por Caja"
 							            required
+													v-model="cantxcaja"
 							          ></v-text-field>
 												<v-text-field
 							            label="Kilos por Caja"
 							            required
+													v-model="kilosxcaja"
 							          ></v-text-field>
 							        </v-card-text>
 							        <v-divider class="mt-5"></v-divider>
