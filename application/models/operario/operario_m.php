@@ -18,4 +18,8 @@ class operario_m extends CI_Model{
 
   }
 
+  function listarReferencias(){
+    return $this->db->query('select ref_id as ID,ref_ot as OT,ref_articulo as ARTICULO,ref_lote as LOTE,ref_um as UM,ref_referencia as REFERENCIA,ref_cantidadEnvase as CANTENVASE,ref_cantidadxEnvase as CANTXENVASE from referencias')->result_array();
+  }
+
 }

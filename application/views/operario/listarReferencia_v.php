@@ -76,29 +76,35 @@
 							    <v-toolbar>
 							      <v-toolbar-title>Referencias</v-toolbar-title>
 							      <v-spacer></v-spacer>
+										<v-text-field
+							        v-model="search"
+							        append-icon="search"
+							        label="Buscar"
+							        single-line
+							        hide-details
+							      ></v-text-field>
 							      <v-dialog v-model="dialog_crud" max-width="500px">
 							        <v-card>
 							          <v-card-title>
 							            <span class="headline">{{ formTitle }}</span>
 							          </v-card-title>
-
 							          <v-card-text>
 							            <v-container grid-list-md>
 							              <v-layout wrap>
 							                <v-flex xs12 sm6 md4>
-							                  <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
+							                  <v-text-field v-model="editedItem.OT" label="OT"></v-text-field>
 							                </v-flex>
 							                <v-flex xs12 sm6 md4>
-							                  <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
+							                  <v-text-field v-model="editedItem.REFERENCIA" label="REFERENCIA"></v-text-field>
 							                </v-flex>
 							                <v-flex xs12 sm6 md4>
-							                  <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
+							                  <v-text-field v-model="editedItem.ARTICULO" label="ARTICULO"></v-text-field>
 							                </v-flex>
 							                <v-flex xs12 sm6 md4>
-							                  <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
+							                  <v-text-field v-model="editedItem.LOTE" label="LOTE"></v-text-field>
 							                </v-flex>
 							                <v-flex xs12 sm6 md4>
-							                  <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+							                  <v-text-field v-model="editedItem.UM" label="UM"></v-text-field>
 							                </v-flex>
 							              </v-layout>
 							            </v-container>
@@ -106,8 +112,8 @@
 
 							          <v-card-actions>
 							            <v-spacer></v-spacer>
-							            <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-							            <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
+							            <v-btn color="blue darken-1" flat @click.native="close">Cancelar</v-btn>
+							            <v-btn color="blue darken-1" flat @click.native="save">Guardar</v-btn>
 							          </v-card-actions>
 							        </v-card>
 							      </v-dialog>
@@ -117,13 +123,15 @@
 							      :items="desserts"
 							      hide-actions
 							      class="elevation-1"
+										:search="search"
 							    >
 							      <template slot="items" slot-scope="props">
-							        <td>{{ props.item.name }}</td>
-							        <td class="text-xs-right">{{ props.item.calories }}</td>
-							        <td class="text-xs-right">{{ props.item.fat }}</td>
-							        <td class="text-xs-right">{{ props.item.carbs }}</td>
-							        <td class="text-xs-right">{{ props.item.protein }}</td>
+							        <td>{{ props.item.ID }}</td>
+							        <td class="text-xs-right">{{ props.item.OT }}</td>
+							        <td class="text-xs-right">{{ props.item.REFERENCIA }}</td>
+											<td class="text-xs-right">{{ props.item.ARTICULO }}</td>
+							        <td class="text-xs-right">{{ props.item.LOTE }}</td>
+							        <td class="text-xs-right">{{ props.item.UM }}</td>
 							        <td class="justify-center layout px-0">
 							          <v-icon
 							            small
@@ -140,6 +148,9 @@
 							          </v-icon>
 							        </td>
 							      </template>
+										<v-alert slot="no-results" :value="true" color="error" icon="warning">
+							        No hay resultados para: "{{ search }}".
+							      </v-alert>
 							      <template slot="no-data">
 							        <v-btn color="primary" @click="initialize">Reset</v-btn>
 							      </template>

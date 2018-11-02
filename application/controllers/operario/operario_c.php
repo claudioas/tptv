@@ -27,7 +27,6 @@ class operario_c extends CI_Controller{
 
   function listar_referencia(){
     session_start();
-    // if ($_SESSION['per_tipo'] == 'DESHIDRATADO') {
     if (empty($_SESSION['per_tipo'])) {
       $this->load->view('index');
     }
@@ -38,6 +37,10 @@ class operario_c extends CI_Controller{
     // session_start();
     // echo json_encode($_SESSION['per_tipo']);
     echo json_encode($this->operario_m->ingresarReferencia($this->input->post('txt_ot'),$this->input->post('txt_articulo'),$this->input->post('txt_lote'),$this->input->post('txt_um'),$this->input->post('txt_referencia'),$this->input->post('txt_cantxcaja'),$this->input->post('txt_kilosxcaja')));
+  }
+
+  function listarReferencias(){
+    echo json_encode($this->operario_m->listarReferencias());
   }
 
 }
