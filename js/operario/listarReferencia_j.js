@@ -4,8 +4,12 @@ new Vue({
     errors:[],
     u:'',
     p:'',
+    search: '',
     // dialog: false,
     drawer: null,
+    pagination: {
+        sortBy: 'name'
+      },
     items: [
       { heading: 'Referencias' },
       { icon: 'add', text: 'Crear Referencias', url: 'operario/operario_c/crear_referencia' },
@@ -19,17 +23,13 @@ new Vue({
     ],
     dialog_crud: false,
     headers: [
-      {
-        text: 'Dessert (100g serving)',
-        align: 'left',
-        sortable: false,
-        value: 'name'
-      },
-      { text: 'Calories', value: 'calories' },
-      { text: 'Fat (g)', value: 'fat' },
-      { text: 'Carbs (g)', value: 'carbs' },
-      { text: 'Protein (g)', value: 'protein' },
-      { text: 'Actions', value: 'name', sortable: false }
+      { text: '#', align: 'left', sortable: true, value: 'ID' },
+      { text: 'OT', align: 'center', value: 'OT' },
+      { text: 'REFERENCIA', align: 'center', value: 'REFERENCIA' },
+      { text: 'ARTICULO', align: 'center', value: 'ARTICULO' },
+      { text: 'LOTE', align: 'center', value: 'LOTE' },
+      { text: 'UM', align: 'center', value: 'UM' },
+      { text: 'Acciones', align: 'center', value: 'name', sortable: false }
     ],
     desserts: [],
     editedIndex: -1,
@@ -51,7 +51,7 @@ new Vue({
 
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'Nuevo item?' : 'Editar item?'
+      return this.editedIndex === -1 ? 'Nuevo' : 'Editar item'
     }
   },
 
@@ -74,36 +74,11 @@ new Vue({
       window.location.href = base_url+i
     },
     initialize () {
-      this.desserts = [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3
-        }
-      ]
+      this.$http.post(base_url+'operario/operario_c/listarReferencias').then(response => {
+        this.desserts = response.body;
+      }, response => {
+        console.log('error http post listarReferencia');
+      });
     },
 
     editItem (item) {
@@ -114,7 +89,7 @@ new Vue({
 
     deleteItem (item) {
       const index = this.desserts.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+      confirm('¿Seguro que lo quieres eliminar?') && this.desserts.splice(index, 1)
     },
 
     close () {
