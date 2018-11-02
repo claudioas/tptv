@@ -94,6 +94,11 @@
 													v-model="select"
 												>
 												</v-autocomplete>
+												<v-text-field
+							            label="Lote"
+							            required
+													v-model="lote"
+							          ></v-text-field>
 							          <v-text-field
 							            label="Articulo"
 							            required

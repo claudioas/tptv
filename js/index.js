@@ -5,6 +5,8 @@ new Vue({
     u:'',
     p:'',
     dialog: false,
+    model: 'tab-2',
+    text: 'Lorem ip',
     drawer: null,
     candidatos: [{ name:'OT123' }, { name:'OT456' }],
     items: [
@@ -43,5 +45,8 @@ new Vue({
           console.log(response)
       });
     },
+    loginGoogle: function(e){
+      console.log("google");
+    }
   }
 })
