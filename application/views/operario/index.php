@@ -82,8 +82,10 @@
 							  <v-layout justify-center>
 							    <v-flex xs12 sm10 md8 lg6>
 							      <v-card ref="form">
-							        <v-card-text>
+											<v-toolbar>
 												<v-toolbar-title>Crear Referencia</v-toolbar-title>
+											</v-toolbar>
+							        <v-card-text>
 												<v-autocomplete
 													box
 													color="blue-grey lighten-2"

@@ -6,6 +6,7 @@ new Vue({
     p:'',
     ot: '',
     articulo:'',
+    lote:'',
     um:'',
     referencia:'',
     cantxcaja:'',
@@ -31,8 +32,8 @@ new Vue({
   },
   methods: {
     ingresarReferencia: function(){
-      let datos = {txt_ot:this.select,txt_articulo:this.articulo,txt_um:this.um,txt_referencia:this.referencia,txt_cantxcaja:this.cantxcaja,txt_kilosxcaja:this.kilosxcaja}
-      this.$http.post(base_url+'operario/operario_c/ingresarReferencia',datos).then(response => {
+      let datos = {txt_ot:this.select,txt_articulo:this.articulo,txt_lote:this.lote,txt_um:this.um,txt_referencia:this.referencia,txt_cantxcaja:this.cantxcaja,txt_kilosxcaja:this.kilosxcaja}
+      this.$http.post(base_url+'operario/operario_c/ingresarReferencia',datos, {emulateJSON: true}).then(response => {
         console.log(response.body);
       }, response => {
         console.log('error http post');
