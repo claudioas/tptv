@@ -14,6 +14,7 @@ class index_m extends CI_Model{
       if (count($resultado) == 1) {
         session_start();
         $_SESSION['per_tipo'] = $resultado[0]['per_tipo'];
+        $_SESSION['perf_nombre'] = $resultado[0]['perf_nombre'];
         return $resultado[0]['perf_nombre'];
       }
     }else {
