@@ -74,12 +74,10 @@
 							<template>
 							  <v-layout justify-center>
 							    <v-flex xs12 sm10 md8 lg6>
-							      <v-card ref="form">
+							      <!-- <v-card ref="form">
 											<v-list>
 							          <v-list-group
 							            v-for="item in list"
-							            v-model="item.ot"
-													v-if="item.estado === 'activado'"
 							            no-action
 							          >
 							            <v-list-tile slot="activator">
@@ -94,44 +92,43 @@
 							              <v-list-tile-content>
 															<v-list-tile-title>{{ subItem.descripcion }} {{ subItem.descripcion2 }}</v-list-tile-title>
 							              </v-list-tile-content>
-														<!-- <draggable element="el-collapse" :list="list" :component-data="getComponentData()">
-														<el-collapse-item v-for="e in list" :title="e.title" :name="e.name" :key="e.name">
-														<div>{{e.description}}</div>
-													</el-collapse-item>
-												</draggable> -->
-
 							            </v-list-tile>
 							          </v-list-group>
 							        </v-list>
-							      </v-card>
-										<!-- <v-card ref="form">
-											<v-list>
-												<v-list-group
-							            v-for="item in list"
-							            v-model="item.ot"
-													v-if="item.estado === 'desactivado'"
-							            :key="item.title"
-							            :prepend-icon="item.action"
-							            no-action
-							          >
-							            <v-list-tile slot="activator">
-							              <v-list-tile-content>
-							                <v-list-tile-title>{{ item.ot }}</v-list-tile-title>
-							              </v-list-tile-content>
-							            </v-list-tile>
+							      </v-card> -->
+										<!-- <v-list>
+											<v-list-group
+												no-action
+											> -->
+									      <draggable v-model="list">
+									        <transition-group>
+									          <div v-for="(job, index) in list"
+									               v-bind:key="job.ot"
+																 v-show="job.estado === 'activado'"
+									          >
+															<v-list>
+																<v-list-group
+																	no-action
+																>
+																	<v-list-tile slot="activator">
+																		<v-list-tile-content>
+																			<v-list-tile-title>{{ job.articulo }} </v-list-tile-title>
+																		</v-list-tile-content>
+																	</v-list-tile>
 
-							            <v-list-tile
-							              v-for="subItem in item.items"
-							              :key="subItem.subtitle"
-							              @click=""
-							            >
-							              <v-list-tile-content>
-															<v-list-tile-title>{{ subItem.descripcion }} {{ subItem.descripcion2 }}</v-list-tile-title>
-							              </v-list-tile-content>
-							            </v-list-tile>
-							          </v-list-group>
-											</v-list>
-										</v-card> -->
+																	<v-list-tile v-for="subItem in job.items">
+																		<v-list-tile-content>
+																			<v-list-tile-title>{{ subItem.descripcion }} {{ subItem.descripcion2 }}</v-list-tile-title>
+											              </v-list-tile-content>
+											            </v-list-tile>
+
+																</v-list-group>
+															</v-list>
+									          </div>
+									        </transition-group>
+									      </draggable>
+									<!-- </v-list-group>
+								</v-list> -->
 							    </v-flex>
 							  </v-layout>
 							</template>

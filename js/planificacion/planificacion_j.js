@@ -1,10 +1,27 @@
 new Vue({
   el: '#app',
   data: {
+    machines: [
+      	{
+        	name: "H1",
+          id: 1,
+          jobs: [
+          	{
+            	jobNumber: "14037-12"
+            },
+            {
+            	jobNumber: "14038-13"
+            },
+            {
+            	jobNumber: "14048-15"
+            }
+          ]
+        }
+      ],
     dialog: false,
     drawer: null,
     list: [{ot:"OT1",articulo:"ART0001",referencia:"referencia",estado:'activado',items:[{descripcion:"descripción 1",descripcion2:"descripción 2"}]},
-           {ot:"OT2",articulo:"ART0001",referencia:"referencia",estado:'desactivado',items:[{descripcion:"descripción 1",descripcion2:"descripción 2"}]}],
+           {ot:"OT2",articulo:"ART0002",referencia:"referencia",estado:'desactivado',items:[{descripcion:"descripción 4",descripcion2:"descripción 4"}]}],
     items: [
       // { heading: 'Referencias' },
       // { icon: 'add', text: 'Crear Referencias', url: 'operario/operario_c/crear_referencia' },
