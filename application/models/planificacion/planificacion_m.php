@@ -7,4 +7,29 @@ class planificacion_m extends CI_Model{
     parent::__construct();
   }
 
+  function listarOt(){
+    $activadas = array();
+    $desactivadas = array();
+    $retorno = array();
+    $valor = $this->db->query("select * from ot")->result_array();
+    if (!empty($valor)) {
+      for ($i=0; $i < count($valor); $i++) {
+        if ($valor[$i]['ot_estado'] == 'ACTIVADA') {
+          array_push($activadas,$valor[$i]);
+        }else{
+          array_push($desactivadas,$valor[$i]);
+        }
+      }
+      array_push($retorno,$activadas);
+      array_push($retorno,$desactivadas);
+      return $retorno;
+    }else{
+      return "otvacio";
+    }
+  }
+
+  function actualizarEstado($ot_articulo,$ot_dominio,$ot_estado,$ot_id,$ot_lote,$ot_ot,$ot_registro,$ot_tipo,$ot_usuario){
+    // var_dump($ot_articulo,$ot_dominio,$ot_estado,$ot_id,$ot_lote,$ot_ot,$ot_registro,$ot_tipo,$ot_usuario);
+  }
+
 }

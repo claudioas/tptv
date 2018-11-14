@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php session_start(); ?>
+
 <head>
 	<script>
 		let base_url = '<?php echo base_url() ?>';
@@ -60,51 +61,24 @@
 		            </v-list-tile-content>
 		          </v-list-tile>
 		        </template>
-				</v-list>
-				</v-navigation-drawer>
-				<v-toolbar color="amber" app absolute clipped-left>
-					<v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
+		</v-list>
+		</v-navigation-drawer>
+		<v-toolbar color="amber" app absolute clipped-left>
+			<v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
 
-					<span class="title ml-3 mr-5">TPT&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;<?php  echo (empty($_SESSION['per_tipo'])) ? "NO" : strtoupper(substr($_SESSION['perf_nombre'],-strlen($_SESSION['perf_nombre']),$_SESSION['perf_nombre']-2)); ?><span class="font-weight-light"></span></span>
-					<v-spacer></v-spacer>
-				</v-toolbar>
-				<v-content>
-					<v-container fluid fill-height class="grey lighten-4">
-						<v-layout justify-center align-top>
-							<template>
+			<span class="title ml-3 mr-5">TPT&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;<?php  echo (empty($_SESSION['per_tipo'])) ? "NO" : strtoupper(substr($_SESSION['perf_nombre'],-strlen($_SESSION['perf_nombre']),$_SESSION['perf_nombre']-2)); ?><span class="font-weight-light"></span></span>
+			<v-spacer></v-spacer>
+		</v-toolbar>
+		<v-content>
+			<v-container fluid fill-height class="grey lighten-4">
+				<v-layout justify-center align-top>
+					<template>
 							  <v-layout justify-center>
 							    <v-flex xs12 sm10 md8 lg6>
-							      <!-- <v-card ref="form">
-											<v-list>
-							          <v-list-group
-							            v-for="item in list"
-							            no-action
-							          >
-							            <v-list-tile slot="activator">
-							              <v-list-tile-content>
-							                <v-list-tile-title>{{ item.ot }} {{ item.articulo }}</v-list-tile-title>
-							              </v-list-tile-content>
-							            </v-list-tile>
-
-							            <v-list-tile
-							              v-for="subItem in item.items"
-							            >
-							              <v-list-tile-content>
-															<v-list-tile-title>{{ subItem.descripcion }} {{ subItem.descripcion2 }}</v-list-tile-title>
-							              </v-list-tile-content>
-							            </v-list-tile>
-							          </v-list-group>
-							        </v-list>
-							      </v-card> -->
-										<!-- <v-list>
-											<v-list-group
-												no-action
-											> -->
-									      <draggable v-model="list">
-									        <transition-group>
-									          <div v-for="(job, index) in list"
-									               v-bind:key="job.ot"
-																 v-show="job.estado === 'activado'"
+									      <draggable v-model="ot_activada" :options="{group:'people'}" :move="checkMove" id="activada">
+									        <transition-group class="activada">
+									          <div v-for="(ote, index) in ot_activada"
+									               v-bind:key="ote.ot_id"
 									          >
 															<v-list>
 																<v-list-group
@@ -112,13 +86,13 @@
 																>
 																	<v-list-tile slot="activator">
 																		<v-list-tile-content>
-																			<v-list-tile-title>{{ job.articulo }} </v-list-tile-title>
+																			<v-list-tile-title>{{ ote.ot_ot }} </v-list-tile-title>
 																		</v-list-tile-content>
 																	</v-list-tile>
 
-																	<v-list-tile v-for="subItem in job.items">
+																	<v-list-tile>
 																		<v-list-tile-content>
-																			<v-list-tile-title>{{ subItem.descripcion }} {{ subItem.descripcion2 }}</v-list-tile-title>
+																			<v-list-tile-title>{{ ote.ot_articulo }} {{ ote.ot_lote }}</v-list-tile-title>
 											              </v-list-tile-content>
 											            </v-list-tile>
 
@@ -127,16 +101,58 @@
 									          </div>
 									        </transition-group>
 									      </draggable>
-									<!-- </v-list-group>
-								</v-list> -->
+												<v-snackbar
+												v-model="snackbar"
+												:color="color"
+												:multi-line="mode === 'multi-line'"
+												:timeout="timeout"
+												:vertical="mode === 'vertical'"
+												>
+												{{ text }}
+												<v-btn
+												dark
+												flat
+												@click="snackbar = false"
+												>
+												Close
+											</v-btn>
+										</v-snackbar>
+							    </v-flex>
+									<v-flex xs12 sm10 md8 lg6>
+									      <draggable v-model="ot_desactivada" :options="{group:'people'}" :move="checkMove" id="desactivada">
+									        <transition-group class="desactivada">
+									          <div v-for="(ote, index) in ot_desactivada"
+									               v-bind:key="ote.ot_id"
+									          >
+															<v-list>
+																<v-list-group
+																	no-action
+																>
+																	<v-list-tile slot="activator">
+																		<v-list-tile-content>
+																			<v-list-tile-title>{{ ote.ot_ot }} </v-list-tile-title>
+																		</v-list-tile-content>
+																	</v-list-tile>
+
+																	<v-list-tile >
+																		<v-list-tile-content>
+																			<v-list-tile-title>{{ ote.ot_articulo }} {{ ote.ot_lote }}</v-list-tile-title>
+											              </v-list-tile-content>
+											            </v-list-tile>
+
+																</v-list-group>
+															</v-list>
+									          </div>
+									        </transition-group>
+									      </draggable>
 							    </v-flex>
 							  </v-layout>
 							</template>
-						</v-layout>
+				</v-layout>
 
-					</v-container>
-				</v-content>
-			</v-app>
+			</v-container>
+		</v-content>
+		</v-app>
 		</template>
 
 	</div>
@@ -145,8 +161,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.15.0/vuedraggable.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.15.0/vuedraggable.min.js"></script>
 	<script src="<?php echo base_url() ?>js/vue-custom-element.js"></script>
 	<script src="<?php echo base_url() ?>js/planificacion/planificacion_j.js"></script>
 </body>

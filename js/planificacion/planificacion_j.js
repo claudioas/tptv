@@ -20,44 +20,63 @@ new Vue({
       ],
     dialog: false,
     drawer: null,
-    list: [{ot:"OT1",articulo:"ART0001",referencia:"referencia",estado:'activado',items:[{descripcion:"descripción 1",descripcion2:"descripción 2"}]},
-           {ot:"OT2",articulo:"ART0002",referencia:"referencia",estado:'desactivado',items:[{descripcion:"descripción 4",descripcion2:"descripción 4"}]}],
+    ot_activada: [],
+    ot_desactivada: [],
     items: [
       // { heading: 'Referencias' },
       // { icon: 'add', text: 'Crear Referencias', url: 'operario/operario_c/crear_referencia' },
-      { icon: 'format_list_bulleted', text: 'Referencias', url: 'operario/operario_c/listar_referencia'  },
+      { icon: 'format_list_bulleted', text: 'Maestro OT', url: 'planificacion/planificacion_c'  },
       // { divider: true },
       // { heading: 'Transacciones' },
       // { icon: 'add', text: 'Crear Transacción',url: 'operario/operario_c/crear_transaccion'  },
-      { icon: 'format_list_bulleted', text: 'Transacción', url: 'operario/operario_c/listar_transaccion' },
+      { icon: 'format_list_bulleted', text: 'Referencias', url: 'planificacion/planificacion_c' },
       { divider: true },
       { icon: 'exit_to_app', text: 'Cerrar Sesion' },
-    ]
+    ],
+    snackbar: false,
+    color: '',
+    mode: '',
+    timeout: 2000,
+    text: ''
   },
   props: {
       source: String
   },
+  created(){
+    this.listarOt()
+  },
   methods: {
     redireccionar: function(i){
-      // console.log(base_url+i);
-      window.location.href = base_url
+      window.location.href = base_url+i
     },
-    handleChange() {
-      console.log('changed');
+    checkMove: function(evt,originalEvent){
+      let ot = evt.draggedContext.element;
+      let ahora = evt.from.getAttribute('class');
+      let despues = evt.to.getAttribute('class');
+      // console.log(ot);
+      this.$http.post(base_url+'planificacion/planificacion_c/actualizarEstado',ot, {emulateJSON: true}).then(response => {
+        console.log(response.body);
+        this.color = 'success';
+        this.snackbar = true;
+        this.text = despues.toUpperCase();
+      }, response => {
+        this.color = 'error';
+        this.snackbar = true;
+        this.text = "error al actualizar".toUpperCase();
+        console.log('error http post planificacion_c/actualizarEstado');
+      });
     },
-    inputChanged(value) {
-      this.activeNames = value;
-    },
-    getComponentData() {
-      return {
-        on: {
-          change: this.handleChange,
-          input: this.inputChanged
-        },
-        props: {
-          value: this.activeNames
-        }
-      };
+    listarOt (){
+          this.$http.post(base_url+'planificacion/planificacion_c/listarOt',{emulateJSON: true}).then(response => {
+            if (response.body == "otvacio") {
+              console.log("otvacio",response.body);
+            } else {
+              this.ot_activada = response.body[0];
+              this.ot_desactivada = response.body[1];
+            }
+      }, response => {
+        console.log('error http post planificacion_c/listarOt');
+      });
     }
   }
 })
