@@ -53,8 +53,17 @@ new Vue({
       let ot = evt.draggedContext.element;
       let ahora = evt.from.getAttribute('class');
       let despues = evt.to.getAttribute('class');
-      // console.log(ot);
-      this.$http.post(base_url+'planificacion/planificacion_c/actualizarEstado',ot, {emulateJSON: true}).then(response => {
+      let ot_articulo = ot['ot_articulo'];
+      let ot_dominio = ot['ot_dominio'];
+      let ot_estado = ot['ot_estado'];
+      let ot_id = ot['ot_id'];
+      let ot_lote = ot['ot_lote'];
+      let ot_ot = ot['ot_ot'];
+      let ot_registro = ot['ot_registro'];
+      let ot_tipo = ot['ot_tipo'];
+      let ot_usuario = ot['ot_usuario'];
+      let datos = {ot:ot,ahora:ahora,despues:despues,ot_articulo:ot_articulo,ot_dominio:ot_dominio,ot_estado:ot_estado,ot_id:ot_id,ot_lote:ot_lote,ot_ot:ot_ot,ot_registro:ot_registro,ot_tipo:ot_tipo,ot_usuario:ot_usuario}
+      this.$http.post(base_url+'planificacion/planificacion_c/actualizarEstado',datos, {emulateJSON: true}).then(response => {
         console.log(response.body);
         this.color = 'success';
         this.snackbar = true;

@@ -28,8 +28,8 @@ class planificacion_m extends CI_Model{
     }
   }
 
-  function actualizarEstado($ot_articulo,$ot_dominio,$ot_estado,$ot_id,$ot_lote,$ot_ot,$ot_registro,$ot_tipo,$ot_usuario){
-    // var_dump($ot_articulo,$ot_dominio,$ot_estado,$ot_id,$ot_lote,$ot_ot,$ot_registro,$ot_tipo,$ot_usuario);
+  function actualizarEstado($ot,$ahora,$despues,$ot_articulo,$ot_dominio,$ot_estado,$ot_id,$ot_lote,$ot_ot,$ot_registro,$ot_tipo,$ot_usuario){
+    return $this->db->query("update ot set ot_estado = '".strtoupper($despues)."' where ot_ot = '$ot_ot' ");
   }
 
 }
