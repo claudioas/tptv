@@ -32,4 +32,8 @@ class planificacion_m extends CI_Model{
     return $this->db->query("update ot set ot_estado = '".strtoupper($despues)."' where ot_ot = '$ot_ot' ");
   }
 
+  function listarReferencias(){
+    return $this->db->query("select * from referencias")->result_array();
+  }
+
 }
