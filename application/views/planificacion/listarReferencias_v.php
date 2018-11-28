@@ -78,15 +78,9 @@
                     <v-app id="inspire">
                       <div>
                         <v-toolbar flat color="white">
-                          <v-toolbar-title>My CRUD</v-toolbar-title>
-                          <v-divider
-                            class="mx-2"
-                            inset
-                            vertical
-                          ></v-divider>
+                          <v-toolbar-title>Referencias</v-toolbar-title>
                           <v-spacer></v-spacer>
                           <v-dialog v-model="dialog" max-width="500px">
-                            <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
                             <v-card>
                               <v-card-title>
                                 <span class="headline">{{ formTitle }}</span>
@@ -96,19 +90,25 @@
                                 <v-container grid-list-md>
                                   <v-layout wrap>
                                     <v-flex xs12 sm6 md4>
-                                      <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
+                                      <v-text-field v-model="editedItem.ref_tra" label="TRA"></v-text-field>
                                     </v-flex>
                                     <v-flex xs12 sm6 md4>
-                                      <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
+                                      <v-text-field v-model="editedItem.ref_referencia" label="Ref."></v-text-field>
                                     </v-flex>
                                     <v-flex xs12 sm6 md4>
-                                      <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
+                                      <v-text-field v-model="editedItem.ref_articulo" label="Articulo"></v-text-field>
                                     </v-flex>
                                     <v-flex xs12 sm6 md4>
-                                      <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
+                                      <v-text-field v-model="editedItem.ref_lote" label="Lote"></v-text-field>
                                     </v-flex>
                                     <v-flex xs12 sm6 md4>
-                                      <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+                                      <v-text-field v-model="editedItem.ref_ot" label="OT"></v-text-field>
+                                    </v-flex>
+																		<v-flex xs12 sm6 md4>
+                                      <v-text-field v-model="editedItem.ref_cantidadEnvase" label="Cantidad Envases"></v-text-field>
+                                    </v-flex>
+																		<v-flex xs12 sm6 md4>
+                                      <v-text-field v-model="editedItem.ref_cantidadxEnvase" label="Cantidad x Envases"></v-text-field>
                                     </v-flex>
                                   </v-layout>
                                 </v-container>
@@ -127,12 +127,15 @@
                           :items="desserts"
                           class="elevation-1"
                         >
-                          <template slot="items" slot-scope="props">
-                            <td>{{ props.item.name }}</td>
-                            <td class="text-xs-right">{{ props.item.calories }}</td>
-                            <td class="text-xs-right">{{ props.item.fat }}</td>
-                            <td class="text-xs-right">{{ props.item.carbs }}</td>
-                            <td class="text-xs-right">{{ props.item.protein }}</td>
+                          <template slot="items" slot-scope="props" >
+														<td>{{ props.item.ref_tra }}</td>
+                            <td>{{ props.item.ref_referencia }}</td>
+                            <td class="text-xs-right">{{ props.item.ref_articulo }}</td>
+														<td class="text-xs-right" v-if="!props.item.ref_lote">Sin Lote</td>
+                            <td class="text-xs-right" v-else>{{ props.item.ref_lote }}</td>
+                            <td class="text-xs-right">{{ props.item.ref_ot }}</td>
+														<td class="text-xs-right">{{ props.item.ref_cantidadEnvase }} {{ props.item.ref_umcantidadEnvase }}</td>
+                            <td class="text-xs-right">{{ props.item.ref_cantidadxEnvase }} {{ props.item.ref_umcantidadxEnvase }}</td>
                             <td class="justify-center layout px-0">
                               <v-icon
                                 small

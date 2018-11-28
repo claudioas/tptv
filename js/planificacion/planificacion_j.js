@@ -24,7 +24,7 @@ new Vue({
     ot_desactivada: [],
     items: [
       { icon: 'format_list_bulleted', text: 'Maestro OT', url: 'planificacion/planificacion_c'  },
-      { icon: 'format_list_bulleted', text: 'Referencias', url: 'planificacion/planificacion_c/listarReferencias' },
+      { icon: 'format_list_bulleted', text: 'Referencias', url: 'planificacion/planificacion_c/listarReferencias_v' },
       { divider: true },
       { icon: 'exit_to_app', text: 'Cerrar Sesion' },
     ],

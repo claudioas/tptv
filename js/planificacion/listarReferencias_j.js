@@ -11,12 +11,14 @@ new Vue({
       { icon: 'exit_to_app', text: 'Cerrar Sesion' },
     ],
     headers: [
-      { text: 'Dessert (100g serving)', align: 'left', sortable: false, value: 'name' },
-      { text: 'Calories', value: 'calories' },
-      { text: 'Fat (g)', value: 'fat' },
-      { text: 'Carbs (g)', value: 'carbs' },
-      { text: 'Protein (g)', value: 'protein' },
-      { text: 'Actions', value: 'name', sortable: false }
+      { text: '#TRA', align: 'left', sortable: false, value: 'name' },
+      { text: 'Ref.', value: 'calories' },
+      { text: 'Articulo', value: 'fat' },
+      { text: 'Lote', value: 'carbs' },
+      { text: 'OT', value: 'protein' },
+      { text: 'Cant. Env.', value: 'name', sortable: false },
+      { text: 'Cant. x Env.', value: 'name', sortable: false },
+      { text: 'Acciones', value: 'name', sortable: false }
     ],
     desserts: [],
     editedIndex: -1,
@@ -38,7 +40,7 @@ new Vue({
 
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? 'Agregar item' : 'Editar Referencia'
     }
   },
 
@@ -59,6 +61,7 @@ new Vue({
     initialize () {
       this.$http.post(base_url+'planificacion/planificacion_c/listarReferencias', {emulateJSON: true}).then(response => {
         console.log(response.body);
+        this.desserts = response.body;
       }, response => {
         console.log('error http post planificacion_c/listarReferencias');
       });
