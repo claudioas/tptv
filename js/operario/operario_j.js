@@ -25,7 +25,7 @@ new Vue({
       { icon: 'add', text: 'Crear Transacción',url: 'operario/operario_c/crear_transaccion'  },
       { icon: 'format_list_bulleted', text: 'Listar Transacción', url: 'operario/operario_c/listar_transaccion' },
       { divider: true },
-      { icon: 'exit_to_app', text: 'Cerrar Sesion' },
+      { icon: 'exit_to_app', text: 'Cerrar Sesion', url:'' },
     ]
   },
   props: {
@@ -41,8 +41,11 @@ new Vue({
       });
     },
     redireccionar: function(i){
-      // console.log(base_url+i);
-      window.location.href = base_url+i
+      if (i === '') {
+        window.location.href = base_url
+      } else {
+        window.location.href = base_url+i
+      }
     }
   }
 })

@@ -28,4 +28,8 @@ class planificacion_c extends CI_Controller{
     echo json_encode($this->planificacion_m->listarReferencias());
   }
 
+  function actualizarReferencia(){
+    echo json_encode($this->planificacion_m->actualizarReferencia($this->input->post('ref_tra'),$this->input->post('ref_referencia'),$this->input->post('ref_articulo'),$this->input->post('ref_lote'),$this->input->post('ref_ot'),$this->input->post('ref_cantidadEnvase'),$this->input->post('ref_cantidadxEnvase')));
+  }
+
 }

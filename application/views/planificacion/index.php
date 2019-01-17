@@ -6,7 +6,7 @@
 	<script>
 		let base_url = '<?php echo base_url() ?>';
 	</script>
-	<title>Home</title>
+	<title>TPT</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
@@ -75,6 +75,10 @@
 					<template>
 							  <v-layout justify-center>
 							    <v-flex xs12 sm10 md8 lg6>
+										<v-toolbar>
+											<v-toolbar-title>OT Activadas</v-toolbar-title>
+											<v-spacer></v-spacer>
+										</v-toolbar>
 									      <draggable v-model="ot_activada" :options="{group:'people'}" :move="checkMove" id="activada">
 									        <transition-group class="activada">
 									          <div v-for="(ote, index) in ot_activada"
@@ -86,7 +90,7 @@
 																>
 																	<v-list-tile slot="activator">
 																		<v-list-tile-content>
-																			<v-list-tile-title>{{ ote.ot_ot }} </v-list-tile-title>
+																			<v-list-tile-title>{{ ote.ot_ot }}</v-list-tile-title>
 																		</v-list-tile-content>
 																	</v-list-tile>
 
@@ -114,11 +118,20 @@
 												flat
 												@click="snackbar = false"
 												>
-												Close
+												<v-icon>done</v-icon>
 											</v-btn>
 										</v-snackbar>
 							    </v-flex>
+									<v-divider
+										class="mx-3"
+										inset
+										vertical
+									></v-divider>
 									<v-flex xs12 sm10 md8 lg6>
+										<v-toolbar>
+											<v-toolbar-title>OT Desactivadas</v-toolbar-title>
+											<v-spacer></v-spacer>
+										</v-toolbar>
 									      <draggable v-model="ot_desactivada" :options="{group:'people'}" :move="checkMove" id="desactivada">
 									        <transition-group class="desactivada">
 									          <div v-for="(ote, index) in ot_desactivada"

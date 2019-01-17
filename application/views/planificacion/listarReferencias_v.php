@@ -10,6 +10,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	<meta name="google-signin-client_id" content="217271811703-ak5ss6uarm1bggup8est6gk7ih3938o4.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -77,6 +78,22 @@
                   <div id="app">
                     <v-app id="inspire">
                       <div>
+												<v-snackbar
+												v-model="snackbar"
+												:color="color"
+												:multi-line="mode === 'multi-line'"
+												:timeout="timeout"
+												:vertical="mode === 'vertical'"
+												>
+												{{ text }}
+												<v-btn
+												dark
+												flat
+												@click="snackbar = false"
+												>
+												<v-icon>done</v-icon>
+											</v-btn>
+										</v-snackbar>
                         <v-toolbar flat color="white">
                           <v-toolbar-title>Referencias</v-toolbar-title>
                           <v-spacer></v-spacer>
@@ -116,8 +133,8 @@
 
                               <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                                <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
+                                <v-btn color="blue darken-1" flat @click.native="close">Cancelar</v-btn>
+                                <v-btn color="blue darken-1" flat v-on:click="actualizarReferencia()">Actualizar</v-btn>
                               </v-card-actions>
                             </v-card>
                           </v-dialog>
@@ -174,6 +191,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="//cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.15.0/vuedraggable.min.js"></script>
 	<script src="<?php echo base_url() ?>js/vue-custom-element.js"></script>

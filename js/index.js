@@ -1,30 +1,15 @@
+
 new Vue({
   el: '#app',
   data: {
     errors:[],
+    txt_rut:"txt_rut",
     u:'',
     p:'',
     dialog: false,
     model: 'tab-2',
     text: 'Lorem ip',
     drawer: null,
-    candidatos: [{ name:'OT123' }, { name:'OT456' }],
-    items: [
-      { icon: 'lightbulb_outline', text: 'Notes' },
-      { icon: 'touch_app', text: 'Reminders' },
-      { divider: true },
-      { heading: 'Labels' },
-      { icon: 'add', text: 'Create new label' },
-      { divider: true },
-      { icon: 'archive', text: 'Archive' },
-      { icon: 'delete', text: 'Trash' },
-      { divider: true },
-      { icon: 'settings', text: 'Settings' },
-      { icon: 'chat_bubble', text: 'Trash' },
-      { icon: 'help', text: 'Help' },
-      { icon: 'phonelink', text: 'App downloads' },
-      { icon: 'keyboard', text: 'Keyboard shortcuts' }
-    ]
   },
   props: {
       source: String
@@ -45,8 +30,50 @@ new Vue({
           console.log(response)
       });
     },
-    loginGoogle: function(e){
-      console.log("google");
+    valida_rut: function(e){
+      // VALIDA RUT
+      // $('.v-text-field__slot').children().Rut({
+      //   on_error: function(){ alert("RUT Incorrecto") },
+      //   format_on: 'keyup'
+      // });
+      // VALIDA RUT
     }
+
   }
 })
+
+// SIGN-IN GOOGLE USUARIOS PLANIFICACIÓN
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  let user = profile.getEmail();
+  if (user != '') {
+    $.ajax({
+      url: base_url+'index/onSignIn',
+      type: 'POST',
+      dataType: 'json',
+      data: {user:user}
+    })
+    .done(function(data) {
+      console.log(data);
+      console.log("success onSignIn");
+      let c = data.replace('"', "");
+      c = c.replace('"', "");
+      let s = c.substring(0,c.length-2)
+      if (c.substring(c.length-2) == '_c') {
+        // window.location.href = base_url+s+"/"+c;
+      }else{
+        // this.dialog = true;
+        console.log("erro");
+      }
+    })
+    .fail(function(data) {
+      console.log(data);
+      console.log("error onSignIn");
+    });
+
+  } else {
+
+  }
+
+}
+// SIGN-IN GOOGLE USUARIOS PLANIFICACIÓN

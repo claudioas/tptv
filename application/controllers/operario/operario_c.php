@@ -10,7 +10,6 @@ class operario_c extends CI_Controller{
 
   function index(){
     session_start();
-    // if ($_SESSION['per_tipo'] == 'DESHIDRATADO') {
     if (empty($_SESSION['per_tipo'])) {
       $this->load->view('index');
     }
@@ -25,6 +24,14 @@ class operario_c extends CI_Controller{
     $this->load->view('operario/crearReferencia_v');
   }
 
+  function crear_transaccion(){
+    session_start();
+    if (empty($_SESSION['per_tipo'])) {
+      $this->load->view('index');
+    }
+    $this->load->view('operario/crearTransaccion_v');
+  }
+
   function listar_referencia(){
     session_start();
     if (empty($_SESSION['per_tipo'])) {
@@ -33,12 +40,24 @@ class operario_c extends CI_Controller{
     $this->load->view('operario/listarReferencia_v');
   }
 
+  function listar_transaccion(){
+    session_start();
+    if (empty($_SESSION['per_tipo'])) {
+      $this->load->view('index');
+    }
+    $this->load->view('operario/listarTransacciones_v');
+  }
+
   function ingresarReferencia(){
     echo json_encode($this->operario_m->ingresarReferencia($this->input->post('txt_ot'),$this->input->post('txt_articulo'),$this->input->post('txt_lote'),$this->input->post('txt_um'),$this->input->post('txt_referencia'),$this->input->post('txt_cantxcaja'),$this->input->post('txt_kilosxcaja')));
   }
 
   function listarReferencias(){
     echo json_encode($this->operario_m->listarReferencias());
+  }
+
+  function validaReferencia(){
+    echo json_encode($this->operario_m->validaReferencia($this->input->post('referenciaPistoleada')));
   }
 
 }

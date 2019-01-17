@@ -33,7 +33,11 @@ class planificacion_m extends CI_Model{
   }
 
   function listarReferencias(){
-    return $this->db->query("select * from referencias")->result_array();
+    return $this->db->query("select ref_id,ref_referencia,ref_ot,ref_articulo,ref_um,ref_lote,ref_cantidadEnvase,ref_umcantidadEnvase,ref_cantidadxEnvase,ref_umcantidadxEnvase,ref_total,ref_ubicacion,ref_estado,ref_dominio,ref_tra,ref_fecha,ref_usuario,ref_tipo from referencias")->result_array();
+  }
+
+  function actualizarReferencia($ref_tra,$ref_referencia,$ref_articulo,$ref_lote,$ref_ot,$ref_cantidadEnvase,$ref_cantidadxEnvase){
+    return $this->db->query("update referencias set ref_tra = '".$ref_tra."', ref_referencia = '".$ref_referencia."', ref_articulo = '".$ref_articulo."', ref_lote = '".$ref_lote."', ref_ot = '".$ref_ot."', ref_cantidadEnvase = '".$ref_cantidadEnvase."', ref_cantidadxEnvase = '".$ref_cantidadxEnvase."' where ref_referencia = '".$ref_referencia."' and ref_ot = '".$ref_ot."' ");
   }
 
 }

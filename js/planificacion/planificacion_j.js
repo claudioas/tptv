@@ -23,10 +23,11 @@ new Vue({
     ot_activada: [],
     ot_desactivada: [],
     items: [
+      { heading: 'Menú' },
       { icon: 'format_list_bulleted', text: 'Maestro OT', url: 'planificacion/planificacion_c'  },
       { icon: 'format_list_bulleted', text: 'Referencias', url: 'planificacion/planificacion_c/listarReferencias_v' },
       { divider: true },
-      { icon: 'exit_to_app', text: 'Cerrar Sesion' },
+      { icon: 'exit_to_app', text: 'Cerrar Sesion', url:'' },
     ],
     snackbar: false,
     color: '',
@@ -42,7 +43,11 @@ new Vue({
   },
   methods: {
     redireccionar: function(i){
-      window.location.href = base_url+i
+      if (i === '') {
+        window.location.href = base_url
+      } else {
+        window.location.href = base_url+i
+      }
     },
     checkMove: function(evt,originalEvent){
       let ot = evt.draggedContext.element;
@@ -60,7 +65,11 @@ new Vue({
       let datos = {ot:ot,ahora:ahora,despues:despues,ot_articulo:ot_articulo,ot_dominio:ot_dominio,ot_estado:ot_estado,ot_id:ot_id,ot_lote:ot_lote,ot_ot:ot_ot,ot_registro:ot_registro,ot_tipo:ot_tipo,ot_usuario:ot_usuario}
       this.$http.post(base_url+'planificacion/planificacion_c/actualizarEstado',datos, {emulateJSON: true}).then(response => {
         console.log(response.body);
-        this.color = 'success';
+        if (despues.toUpperCase() === 'DESACTIVADA') {
+          this.color = 'error';
+        }else{
+          this.color = 'success';
+        }
         this.snackbar = true;
         this.text = despues.toUpperCase();
       }, response => {

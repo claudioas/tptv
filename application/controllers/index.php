@@ -9,10 +9,19 @@ class index extends CI_Controller{
   }
 
   function index(){
-    $this->load->view('index');
+    session_start();
+    if (empty($_SESSION['per_tipo'])) {
+      $this->load->view('index');
+    }
+    $this->load->view('operario/index');
   }
 
   function login(){
     echo json_encode($this->index_m->login($this->input->post('u'),$this->input->post('p')));
   }
+
+  function onSignIn(){
+    echo json_encode($this->index_m->onSignIn($this->input->post('user')));
+  }
+
 }
