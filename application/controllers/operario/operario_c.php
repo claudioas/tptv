@@ -60,4 +60,12 @@ class operario_c extends CI_Controller{
     echo json_encode($this->operario_m->validaReferencia($this->input->post('referenciaPistoleada')));
   }
 
+  function ingresarTransaccion(){
+    echo json_encode($this->operario_m->ingresarTransaccion($this->input->post('referenciasTransaccion')));
+  }
+
+  function consultaTransaccion(){
+    echo $this->operario_m->consultaTransaccion();
+  }
+
 }

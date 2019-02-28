@@ -83,7 +83,7 @@
 							    <v-flex xs12 sm10 md8 lg6>
 							      <v-card ref="form">
 											<v-toolbar>
-												<v-toolbar-title>Crear Transacción</v-toolbar-title>
+												<v-toolbar-title>Crear Transacción {{ transaccion }}</v-toolbar-title>
 											</v-toolbar>
 							        <v-card-text>
 												<v-text-field
@@ -110,9 +110,10 @@
 						                @click="toggle(index)"
 						              >
 							                <v-list-tile-content>
-																<v-list-tile-title>Lote: {{ item2.Lote }} {{ items2.Referencia }}</v-list-tile-title>
+																<v-list-tile-title>Lote: {{ item2.Lote }} - Referencia: {{ item2.Referencia }}</v-list-tile-title>
 							                  <v-list-tile-sub-title class="text--primary">Cantidad Envases: {{ item2.CantEnvase }}</v-list-tile-sub-title>
-							                  <v-list-tile-sub-title>Cantidad x Envases: {{ item2.CantxEnvase }}</v-list-tile-sub-title>
+																<v-list-tile-sub-title>Cantidad x Envases: {{ item2.CantxEnvase }}</v-list-tile-sub-title>
+							                  <!-- <v-list-tile-sub-title>Tipo: {{ item2.Tipo }}</v-list-tile-sub-title> -->
 							                </v-list-tile-content>
 							                <v-list-tile-action>
 							                  <v-list-tile-action-text>{{ item2.action }}</v-list-tile-action-text>
@@ -152,7 +153,7 @@
         Click Me
       </v-btn> -->
 
-      <v-card>
+      <v-card><v-icon dark right>block</v-icon>
         <v-card-title
           class="headline grey lighten-2"
           primary-title
@@ -193,7 +194,6 @@
 	>
 		Click Me
 	</v-btn> -->
-
 	<v-card>
 		<v-card-title
 			class="headline grey lighten-2"
@@ -203,7 +203,7 @@
 		</v-card-title>
 
 		<v-card-text>
-			No existe referencia o esta asociada a otra Transacción
+			No existe referencia o está asociada a otra Transacción
 		</v-card-text>
 
 		<v-divider></v-divider>
@@ -222,6 +222,51 @@
 </v-dialog>
 </div>
 </template>
+
+<!-- *** -->
+<template>
+<div class="text-xs-center">
+<v-dialog
+	v-model="correctoTransacciones"
+	width="500"
+>
+	<!-- <v-btn
+		slot="activator"
+		color="red lighten-2"
+		dark
+	>
+		Click Me
+	</v-btn> -->
+	<v-card>
+		<v-card-title
+			class="headline grey lighten-2"
+			primary-title
+		>
+			INGRESADA
+		</v-card-title>
+
+		<v-card-text>
+			Se ingresó correctamente.
+		</v-card-text>
+
+		<v-divider></v-divider>
+
+		<v-card-actions>
+			<v-spacer></v-spacer>
+			<v-btn
+				color="primary"
+				flat
+				@click="correctoTransacciones = false"
+			>
+				Aceptar
+			</v-btn>
+		</v-card-actions>
+	</v-card>
+</v-dialog>
+</div>
+</template>
+<!-- *** -->
+
 <template>
 <div class="text-xs-center">
 <v-dialog

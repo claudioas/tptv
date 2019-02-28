@@ -16,6 +16,7 @@ new Vue({
   },
   methods: {
     login: function(e){
+      console.log("asd");
         let datos = {u:this.u,p:this.p};
         this.$http.post(base_url+'index/login', datos, {emulateJSON: true}).then(function (response) {
           let c = response.data.replace('"', "");

@@ -20,8 +20,38 @@ class operario_m extends CI_Model{
   }
 
   function validaReferencia($referencia){
-    $resultado = $this->db->query("select ref_id as ID, ref_referencia as Referencia, ref_lote as Lote, ref_cantidadEnvase as CantEnvase, ref_cantidadxEnvase as CantxEnvase, ref_total as Total, ref_articulo as Articulo from referencias where ref_referencia = '".$referencia."'")->result_array();
+    $resultado = $this->db->query("select ref_id as ID, ref_referencia as Referencia, ref_lote as Lote, ref_cantidadEnvase as CantEnvase, ref_cantidadxEnvase as CantxEnvase, ref_total as Total, ref_articulo as Articulo, ref_tipo as Tipo from referencias where ref_referencia = '".$referencia."'")->result_array();
+    // print_r("select ref_id as ID, ref_referencia as Referencia, ref_lote as Lote, ref_cantidadEnvase as CantEnvase, ref_cantidadxEnvase as CantxEnvase, ref_total as Total, ref_articulo as Articulo, ref_tipo as Tipo from referencias where ref_referencia = '".$referencia."'");
     return $resultado;
+  }
+
+  function ingresarTransaccion($referenciasTransaccion){
+    session_start();
+    date_default_timezone_set('Chile/Continental');
+    $hoy = date('Y-m-d h:i:s');
+    for ($j=1; $j < count($referenciasTransaccion); $j++) {
+      $query = "update referencias set ref_tra = '".$referenciasTransaccion[0]."', ref_estado = 'ENVIADA' where ref_referencia = '".$referenciasTransaccion[$j]['Referencia']."'";
+      $this->db->query($query);
+      if (!$this->db->query($query)) {
+        break;
+        return "error update referencias";
+      }
+    }
+    $this->db->query("insert into transacciones(tra_id,tra_tipo,tra_estado,tra_fecha,tra_usuario,tra_dominio) values('".$referenciasTransaccion[0]."','".$_SESSION['per_tipo']."','ENVIADA','".$hoy."','usuarios','".$_SESSION['per_dominio']."')");
+    return true;
+  }
+
+  function consultaTransaccion(){
+    $query = "select tra_id from transacciones order by id desc";
+    $resultado = $this->db->query($query)->row_array();
+    if (!empty($resultado)) {
+      $tra = implode(',',$resultado);
+      $largo = strlen($tra);
+      $id = substr($tra, -($largo-3), $largo);
+      return 'TRA'.($id+1);
+    }else{
+      return 'TRA1';
+    }
   }
 
 

@@ -4,12 +4,14 @@ new Vue({
 		dialog: false,
     dialog2: false,
 		dialog3: false,
+		correctoTransacciones: false,
     alerta: false,
 		drawer: null,
     contenido_alerta: '',
 		referenciaPistoleada: "",
 		selected: [2],
 		items2: [],
+		transaccion: '',
 		items: [{
 				heading: 'Referencias'
 			},
@@ -53,7 +55,8 @@ new Vue({
 		source: String
 	},
 	created() {
-		this.cargaReferenciasls()
+		this.cargaReferenciasls(),
+		this.consultaTransaccion()
 	},
 	methods: {
 		validaReferencia: function() {
@@ -62,6 +65,7 @@ new Vue({
 				if (this.items2.length > 0) {
 					for (var i = 0; i < this.items2.length; i++) {
 						if (this.referenciaPistoleada.toUpperCase() == this.items2[i]['Referencia'].toUpperCase()) {
+						// if (this.referenciaPistoleada == this.items2[i]['Referencia'].toUpperCase()) {
 							repetida = true;
               this.alerta = true;
               this.contenido_alerta = `ya ingresaste esta referencia: ${this.referenciaPistoleada.toUpperCase()}`
@@ -138,8 +142,32 @@ new Vue({
 				}
 			}
 		},
+		consultaTransaccion: function() {
+			this.$http.post(base_url + 'operario/operario_c/consultaTransaccion', {
+				emulateJSON: true
+			}).then(response => {
+				this.transaccion = response.body;
+			}, response => {
+				console.log('error consultaTransaccion http post');
+			});
+		},
 		ingresaTransaccion: function() {
-			console.log("ingresaTransaccion");
+			let ref_localstorage = localStorage.getItem('rs');
+			ref_localstorage = JSON.parse(ref_localstorage);
+			ref_localstorage.unshift(this.transaccion);
+			let datos = {referenciasTransaccion: ref_localstorage}
+			this.$http.post(base_url + 'operario/operario_c/ingresarTransaccion', datos, {
+				emulateJSON: true
+			}).then(response => {
+				console.log(response.body);
+				if (response.body) {
+					this.correctoTransacciones = true;
+				}else{
+					alert("error al ingresar la transacción");
+				}
+			}, response => {
+				console.log('error validaReferencia http post');
+			});
 		},
 		cancelarTransaccion: function() {
 			localStorage.removeItem('rs');
