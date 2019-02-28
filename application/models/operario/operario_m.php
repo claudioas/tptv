@@ -8,7 +8,8 @@ class operario_m extends CI_Model{
   }
 
   function ingresarReferencia($ot,$articulo,$lote,$um,$referencia,$cantxcaja,$kilosxcaja){
-    if ($this->db->query("insert INTO referencias(ref_ot,ref_articulo,ref_lote,ref_um,ref_referencia,ref_cantidadEnvase,ref_cantidadxEnvase) values ('$ot','$articulo','$lote','$um','$referencia','$cantxcaja','$kilosxcaja')")) {
+    session_start();
+    if ($this->db->query("insert INTO referencias(ref_ot,ref_articulo,ref_lote,ref_um,ref_referencia,ref_cantidadEnvase,ref_cantidadxEnvase,ref_dominio) values ('$ot','$articulo','$lote','$um','$referencia','$cantxcaja','$kilosxcaja','".$_SESSION['per_dominio']."')")) {
       return "ok";
     }else {
       return "nook";
@@ -52,6 +53,12 @@ class operario_m extends CI_Model{
     }else{
       return 'TRA1';
     }
+  }
+
+  function referenciaPistoleada($referencia){
+    session_start();
+    $query = "select * from referencias where ref_referencia = '".$referencia."' and ref_dominio = '".$_SESSION['per_dominio']."' ";
+    return $this->db->query($query)->result_array();
   }
 
 

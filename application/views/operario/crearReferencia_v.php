@@ -116,6 +116,7 @@
 													v-model="referencia"
 							            label="Referencia"
 							            required
+													v-on:blur="referenciaPistoleada()"
 							          ></v-text-field>
 							          <v-text-field
 													v-model="cantxcaja"
@@ -131,7 +132,7 @@
 							        <v-divider class="mt-5"></v-divider>
 							        <v-card-actions>
 												<v-spacer></v-spacer>
-							          <v-btn color="primary" @click="ingresarReferencia">INgresar</v-btn>
+							          <v-btn color="primary" @click="ingresarReferencia" :disabled="disabled == 0 ? false : true">INgresar</v-btn>
 							        </v-card-actions>
 							      </v-card>
 							    </v-flex>
@@ -142,6 +143,48 @@
 				</v-content>
 			</v-app>
 		</template>
+		<template>
+  <div class="text-xs-center">
+    <v-dialog
+      v-model="errorReferencia"
+      width="500"
+    >
+      <!-- <v-btn
+        slot="activator"
+        color="red lighten-2"
+        dark
+      >
+        Click Me
+      </v-btn> -->
+
+      <v-card><v-icon dark right>block</v-icon>
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+        >
+          Error
+        </v-card-title>
+
+        <v-card-text>
+          La referencia ya existe
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            flat
+            @click="errorReferencia = false"
+          >
+            Aceptar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

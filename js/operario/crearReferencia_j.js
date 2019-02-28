@@ -6,9 +6,11 @@ new Vue({
     p:'',
     ot: '',
     articulo:'',
+    disabled: 1,
     lote:'',
     um:'',
     referencia:'',
+    errorReferencia: '',
     cantxcaja:'',
     kilosxcaja:'',
     candidatos: [ { name:'OT123' }, { name:'OT456' }],
@@ -45,6 +47,19 @@ new Vue({
       } else {
         window.location.href = base_url+i
       }
+    },
+    referenciaPistoleada: function(){
+      let datos = { referencia : this.referencia }
+      this.$http.post(base_url+'operario/operario_c/referenciaPistoleada',datos, {emulateJSON: true}).then(response => {
+        console.log( );
+        if (response.body.length > 0) {
+          this.errorReferencia = true;
+        }else{
+          this.disabled = (this.disabled + 1) % 2;
+        }
+      }, response => {
+        console.log('error http post');
+      });
     }
   }
 })
