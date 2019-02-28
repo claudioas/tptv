@@ -9,11 +9,11 @@ class index extends CI_Controller{
   }
 
   function index(){
-    session_start();
-    if (empty($_SESSION['per_tipo'])) {
+    // session_start();
+    // if (empty($_SESSION['per_tipo'])) {
       $this->load->view('index');
-    }
-    $this->load->view('operario/index');
+    // }
+    // $this->load->view('operario/index');
   }
 
   function login(){
