@@ -15,6 +15,7 @@ class index_m extends CI_Model{
         session_start();
         $_SESSION['per_tipo'] = $resultado[0]['per_tipo'];
         $_SESSION['perf_nombre'] = $resultado[0]['perf_nombre'];
+        $_SESSION['per_dominio'] = $resultado[0]['per_dominio'];
         return $resultado[0]['perf_nombre'];
       }
     }else {
