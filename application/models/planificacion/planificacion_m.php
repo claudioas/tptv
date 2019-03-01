@@ -8,10 +8,13 @@ class planificacion_m extends CI_Model{
   }
 
   function listarOt(){
+    session_start();
     $activadas = array();
     $desactivadas = array();
     $retorno = array();
-    $valor = $this->db->query("select * from ot")->result_array();
+    $query = "select * from ot where ot_dominio = '".$_SESSION['per_dominio']."' ";
+    $valor = $this->db->query($query)->result_array();
+    // print_r($query);
     if (!empty($valor)) {
       for ($i=0; $i < count($valor); $i++) {
         if ($valor[$i]['ot_estado'] == 'ACTIVADA') {

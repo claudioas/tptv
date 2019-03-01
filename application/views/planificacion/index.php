@@ -90,7 +90,8 @@
 																>
 																	<v-list-tile slot="activator">
 																		<v-list-tile-content>
-																			<v-list-tile-title>{{ ote.ot_ot }}</v-list-tile-title>
+																			<v-list-tile-title>{{ ote.ot_tipo }} &mdash; {{ ote.ot_ot }}</v-list-tile-title>
+																			<v-list-tile-sub-title>{{ ote.ot_articulo }}</v-list-tile-sub-title>
 																		</v-list-tile-content>
 																	</v-list-tile>
 
