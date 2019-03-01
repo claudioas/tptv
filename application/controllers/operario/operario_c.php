@@ -13,7 +13,7 @@ class operario_c extends CI_Controller{
     if (empty($_SESSION['per_tipo'])) {
       $this->load->view('index');
     }
-    $this->load->view('operario/index');
+    $this->load->view('operario/crearReferencia_v');
   }
 
   function crear_referencia(){
