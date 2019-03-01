@@ -13,10 +13,11 @@ new Vue({
     errorReferencia: '',
     cantxcaja:'',
     kilosxcaja:'',
-    candidatos: [ { name:'OT123' }, { name:'OT456' }],
+    candidatos: [],
     select: [],
     dialog: false,
     drawer: null,
+    btn_ingresar: false,
     items: [
       { heading: 'Referencias' },
       { icon: 'add', text: 'Crear Referencias', url: 'operario/operario_c/crear_referencia' },
@@ -32,7 +33,27 @@ new Vue({
   props: {
       source: String
   },
+  computed: {
+    isDisabled: function(){
+    	return !this.btn_ingresar;
+    }
+  },
+  created() {
+    this.listaOt()
+  },
   methods: {
+    listaOt: function(){
+      this.$http.post(base_url+'operario/operario_c/listaOt').then(response => {
+        if (response.body.length > 0) {
+          for (var i = 0; i < response.body.length; i++) {
+            this.candidatos.push(response.body[i]['OT']);
+          }
+        }
+
+      }, response => {
+        console.log('error http post listaOt');
+      });
+    },
     ingresarReferencia: function(){
       let datos = {txt_ot:this.select,txt_articulo:this.articulo,txt_lote:this.lote,txt_um:this.um,txt_referencia:this.referencia,txt_cantxcaja:this.cantxcaja,txt_kilosxcaja:this.kilosxcaja}
       this.$http.post(base_url+'operario/operario_c/ingresarReferencia',datos, {emulateJSON: true}).then(response => {
@@ -51,11 +72,15 @@ new Vue({
     referenciaPistoleada: function(){
       let datos = { referencia : this.referencia }
       this.$http.post(base_url+'operario/operario_c/referenciaPistoleada',datos, {emulateJSON: true}).then(response => {
-        console.log( );
         if (response.body.length > 0) {
+          console.log("si");
           this.errorReferencia = true;
+          this.btn_ingresar = false;
         }else{
-          this.disabled = (this.disabled + 1) % 2;
+          console.log("no");
+          // this.disabled = (this.disabled + 1) % 2;
+          // this.btn_ingresar = !this.btn_ingresar;
+          this.btn_ingresar = true;
         }
       }, response => {
         console.log('error http post');

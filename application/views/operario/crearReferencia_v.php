@@ -132,7 +132,8 @@
 							        <v-divider class="mt-5"></v-divider>
 							        <v-card-actions>
 												<v-spacer></v-spacer>
-							          <v-btn color="primary" @click="ingresarReferencia" :disabled="disabled == 0 ? false : true">INgresar</v-btn>
+												<v-btn color="primary" @click="ingresarReferencia" v-model="btn_ingresar" :disabled='isDisabled'>INgresar</v-btn>
+							          <!-- <v-btn color="primary" @click="ingresarReferencia" :disabled="0">INgresar</v-btn> -->
 							        </v-card-actions>
 							      </v-card>
 							    </v-flex>

@@ -59,6 +59,13 @@ class operario_m extends CI_Model{
     session_start();
     $query = "select * from referencias where ref_referencia = '".$referencia."' and ref_dominio = '".$_SESSION['per_dominio']."' ";
     return $this->db->query($query)->result_array();
+    // return $query;
+  }
+
+  function listaOt(){
+    session_start();
+    $query = "select ot_ot as OT, ot_articulo as Articulo, ot_lote as Lote, ot_tipo as Tipo, ot_dominio as Dominio from ot where ot_dominio = '".$_SESSION['per_dominio']."' and ot_tipo = '".$_SESSION['per_tipo']."' and ot_estado = 'ACTIVADA' ";
+    return $this->db->query($query)->result_array();
   }
 
 

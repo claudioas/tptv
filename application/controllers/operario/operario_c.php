@@ -72,4 +72,8 @@ class operario_c extends CI_Controller{
     echo json_encode($this->operario_m->referenciaPistoleada($this->input->post('referencia')));
   }
 
+  function listaOt(){
+    echo json_encode($this->operario_m->listaOt());
+  }
+
 }
