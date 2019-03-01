@@ -9,7 +9,7 @@ class operario_m extends CI_Model{
 
   function ingresarReferencia($ot,$articulo,$lote,$um,$referencia,$cantxcaja,$kilosxcaja){
     session_start();
-    if ($this->db->query("insert INTO referencias(ref_ot,ref_articulo,ref_lote,ref_um,ref_referencia,ref_cantidadEnvase,ref_cantidadxEnvase,ref_dominio) values ('$ot','$articulo','$lote','$um','$referencia','$cantxcaja','$kilosxcaja','".$_SESSION['per_dominio']."')")) {
+    if ($this->db->query("insert INTO referencias(ref_ot,ref_articulo,ref_lote,ref_um,ref_referencia,ref_cantidadEnvase,ref_cantidadxEnvase,ref_dominio,ref_estado) values ('$ot','$articulo','$lote','$um','$referencia','$cantxcaja','$kilosxcaja','".$_SESSION['per_dominio']."','ACTIVA')")) {
       return "ok";
     }else {
       return "nook";

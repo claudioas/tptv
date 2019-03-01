@@ -77,7 +77,7 @@
 										    <v-flex xs12 sm10 md8 lg6>
 										      <v-card ref="form">
 														<v-toolbar>
-															<v-toolbar-title>Recibir Referencia</v-toolbar-title>
+															<v-toolbar-title>Recibir Referencias</v-toolbar-title>
 														</v-toolbar>
 										        <v-card-text>
 															<v-list three-line>
