@@ -18,6 +18,14 @@ class bodega_c extends CI_Controller{
     $this->load->view('bodega/index');
   }
 
+  function listar_transacciones(){
+    $this->load->view('bodega/listarTransacciones_v');
+  }
+
+  function ubicar_referencia(){
+    $this->load->view('bodega/ubicar_referencia_v');
+  }
+
   function recibirReferencia(){
     echo json_encode($this->bodega_m->recibirReferencia($this->input->post('txt_referencia')));
   }
