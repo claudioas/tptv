@@ -31,7 +31,7 @@ class operario_m extends CI_Model{
     date_default_timezone_set('Chile/Continental');
     $hoy = date('Y-m-d h:i:s');
     for ($j=1; $j < count($referenciasTransaccion); $j++) {
-      $query = "update referencias set ref_tra = '".$referenciasTransaccion[0]."', ref_estado = 'ENVIADA' where ref_referencia = '".$referenciasTransaccion[$j]['Referencia']."'";
+      $query = "update referencias set ref_tra = '".$referenciasTransaccion[0]."', ref_estado = 'ENVIADA' where ref_referencia = '".$referenciasTransaccion[$j]['Referencia']."' and ref_estado = 'ACTIVA' ";
       $this->db->query($query);
       if (!$this->db->query($query)) {
         break;
