@@ -103,7 +103,8 @@
 											                <img :src="item.avatar">{{item.ref_id}}
 											              </v-list-tile-avatar> -->
 											              <v-list-tile-content>
-											                <v-list-tile-title v-html="`#${item.ref_id}) Ref <b>${item.ref_referencia}</b>`"></v-list-tile-title>
+																			<!-- <v-list-tile-title v-html="`#${item.ref_id}) Ref <b>${item.ref_referencia}</b>`"></v-list-tile-title> -->
+											                <v-list-tile-title v-html="`REF: <b>${item.ref_referencia}</b>`"></v-list-tile-title>
 											                <v-list-tile-sub-title v-html="`<b>OT: ${item.ref_ot}</b> - Cant-Env: ${item.ref_cantidadEnvase} - Cant. x Env: ${item.ref_cantidadxEnvase}`"></v-list-tile-sub-title>
 											              </v-list-tile-content>
 											            </v-list-tile>
@@ -114,7 +115,7 @@
 					</v-card-text>
 					<v-card-actions>
 						<v-spacer></v-spacer>
-						<v-btn color="primary" @click="recibirReferencia">Recibir</v-btn>
+						<v-btn color="primary" @click="recibirReferencia()">Recibir</v-btn>
 					</v-card-actions>
 					</v-card>
 					</v-flex>
@@ -125,6 +126,26 @@
 		</v-content>
 		</v-app>
 		</template>
+
+		<!-- ******************** CONFIRMACIÓN PARA RECIBIR ******************** -->
+		<template>
+			<v-dialog v-model="dialog_crud" max-width="500px">
+				<v-flex xs12>
+            <v-card color="blue-grey darken-2" class="white--text">
+              <v-card-title primary-title>
+                <div>
+                  <div class="headline">Unlimited music now</div>
+                  <span>Listen to your favorite artists and albums whenever and wherever, online and offline.</span>
+                </div>
+              </v-card-title>
+              <v-card-actions>
+                <v-btn flat dark>Listen now</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+			</v-dialog>
+		</template>
+<!-- ******************** CONFIRMACIÓN PARA RECIBIR ******************** -->
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
