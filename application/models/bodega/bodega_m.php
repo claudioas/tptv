@@ -7,7 +7,7 @@ class bodega_m extends CI_Model{
     parent::__construct();
   }
 
-  function recibirReferencia($referencia){
+  function consultarReferencia($referencia){
     return $this->db->query("select * from referencias where ref_referencia = '".$referencia."' and ref_estado = 'ENVIADA' and ref_estado != '' ")->result_array();
   }
 

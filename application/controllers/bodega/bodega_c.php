@@ -26,8 +26,8 @@ class bodega_c extends CI_Controller{
     $this->load->view('bodega/ubicar_referencia_v');
   }
 
-  function recibirReferencia(){
-    echo json_encode($this->bodega_m->recibirReferencia($this->input->post('txt_referencia')));
+  function consultarReferencia(){
+    echo json_encode($this->bodega_m->consultarReferencia($this->input->post('txt_referencia')));
   }
 
   function listarReferencias(){

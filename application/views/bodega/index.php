@@ -111,11 +111,11 @@
 											          </template>
 													</v-list>
 					</v-autocomplete>
-					<v-text-field v-model="txt_referencia" label="Referencia" required v-on:keyup.13="recibirReferencia()"></v-text-field>
+					<v-text-field v-model="txt_referencia" label="Referencia" required v-on:keyup.13="consultarReferencia()"></v-text-field>
 					</v-card-text>
 					<v-card-actions>
 						<v-spacer></v-spacer>
-						<v-btn color="primary" @click="recibirReferencia()">Recibir</v-btn>
+						<v-btn color="primary" @click="consultarReferencia()">Recibir</v-btn>
 					</v-card-actions>
 					</v-card>
 					</v-flex>
@@ -131,15 +131,25 @@
 		<template>
 			<v-dialog v-model="dialog_crud" max-width="500px">
 				<v-flex xs12>
-            <v-card color="blue-grey darken-2" class="white--text">
+            <v-card color="blue-grey" class="white--text">
               <v-card-title primary-title>
-                <div>
-                  <div class="headline">Unlimited music now</div>
-                  <span>Listen to your favorite artists and albums whenever and wherever, online and offline.</span>
-                </div>
+
+                  <div class="headline">Confirmar Referencia</div>
+									<v-divider></v-divider>
+									<br>
+									<br>
+									<v-flex xs6>Dominio</v-flex><v-flex xs6>{{ ref_dominio }}</v-flex>
+									<v-flex xs6>OT</v-flex><v-flex xs6>{{ ref_ot }}</v-flex>
+									<v-flex xs6>Lote</v-flex><v-flex xs6>{{ ref_lote }}</v-flex>
+									<v-flex xs6>Articulo</v-flex><v-flex xs6>{{ ref_articulo }}</v-flex>
+									<v-flex xs6>Referencia</v-flex><v-flex xs6>{{ ref_referencia }}</v-flex>
+									<v-flex xs6>Cant. de Envases</v-flex><v-flex xs6>{{ ref_cantidadEnvase }}</v-flex>
+									<v-flex xs6>Cant. x Envases</v-flex><v-flex xs6>{{ ref_cantidadxEnvase }}</v-flex>
+
               </v-card-title>
               <v-card-actions>
-                <v-btn flat dark>Listen now</v-btn>
+								<v-btn color="" @click="closes()">Cancelar</v-btn>
+								<v-btn color="success" @click="recibirReferencia()">Confirmo</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
